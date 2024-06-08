@@ -1,5 +1,11 @@
 const form = document.querySelector(".survey-form");
 form.addEventListener("submit", (e) => {
+  const foodCheckboxes = document.querySelectorAll('input[name="food"]:checked');
+    if (foodCheckboxes.length < 2) {
+        alert('Please select at least two food options.');
+        e.preventDefault();
+    }
+
   e.preventDefault();
   let firstName = document.getElementById("first-name").value;
   let lastName = document.getElementById("last-name").value;
@@ -11,7 +17,13 @@ form.addEventListener("submit", (e) => {
       break;
     }
   }
-  let choiceOFFood = document.getElementById("choice-of-food").value;
+
+  // Collecting checked food choices
+  let foodChoices = [];
+  foodCheckboxes.forEach(checkbox => {
+  foodChoices.push(checkbox.value);
+  });
+  let choiceOFFood = foodChoices.join(", ");
   let address = document.getElementById("address").value;
   let pincode = document.getElementById("pincode").value;
 
